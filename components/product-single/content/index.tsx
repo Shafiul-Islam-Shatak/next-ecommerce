@@ -128,13 +128,25 @@ const Content = ({ product }: ProductContent) => {
               </button>
             </div>
 
-            <button
-              type="submit"
-              onClick={() => addToCart()}
-              className="btn btn--rounded btn--yellow"
-            >
-              Add to cart
-            </button>
+            <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 ">
+              <button
+                type="submit"
+                onClick={() => addToCart()}
+                className="btn btn--rounded btn--yellow "
+              >
+                Add to cart
+              </button>
+
+              {/*  new wishlist button added by shatak */}
+              <button
+                type="submit"
+                onClick={() => addToCart()}
+                className="btn btn--rounded btn--border hover:bg-orange-300"
+              >
+                Add to wishlist
+              </button>
+
+            </div>
             <button
               type="button"
               onClick={toggleFav}

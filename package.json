@@ -46,6 +46,7 @@
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "@typescript-eslint/parser": "^8.16.0",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
@@ -56,7 +57,9 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "fslightbox-react": "^1.5.0",
     "node-fetch": "^3.1.1",
+    "postcss": "^8.4.49",
     "prettier": "^3.4.1",
+    "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.16.0"
   }
