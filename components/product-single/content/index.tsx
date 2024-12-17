@@ -9,10 +9,16 @@ import type { ProductStoreType, ProductType } from "types";
 import productsColors from "../../../utils/data/products-colors";
 import productsSizes from "../../../utils/data/products-sizes";
 import CheckboxColor from "../../products-filter/form-builder/checkbox-color";
+import { addWishProduct, removeWishProduct } from "store/reducers/wishList";
 
 type ProductContent = {
   product: ProductType;
 };
+
+
+
+
+
 
 const Content = ({ product }: ProductContent) => {
   const dispatch = useDispatch();
@@ -25,6 +31,12 @@ const Content = ({ product }: ProductContent) => {
     setItemSize(e.target.value);
 
   const { favProducts } = useSelector((state: RootState) => state.user);
+  const wishList = useSelector((state: RootState) => state.wishList.wishItems);
+
+  const isWishExist = wishList.find((item: any) => item.id === product.id)
+  console.log(isWishExist)
+
+
   const isFavourite = some(
     favProducts,
     (productId) => productId === product.id,
@@ -48,7 +60,6 @@ const Content = ({ product }: ProductContent) => {
       color,
       size: itemSize,
     };
-
     const productStore = {
       count,
       product: productToSave,
@@ -57,8 +68,47 @@ const Content = ({ product }: ProductContent) => {
     dispatch(addProduct(productStore));
   };
 
+  const handleWishList = () => {
+    const productToSave: ProductStoreType = {
+      id: product.id,
+      name: product.name,
+      thumb: product.images ? product.images[0] : "",
+      price: product.currentPrice,
+      count,
+      color,
+      size: itemSize,
+    };
+    const productStore = {
+      count,
+      product: productToSave,
+    };
+
+    dispatch(addWishProduct(productStore))
+
+  }
+
+  const handleRemoveFromWishList = () => {
+    const productToSave: ProductStoreType = {
+      id: product.id,
+      name: product.name,
+      thumb: product.images ? product.images[0] : "",
+      price: product.currentPrice,
+      count,
+      color,
+      size: itemSize,
+    };
+    const productStore = {
+      count,
+      product: productToSave,
+    };
+
+    dispatch(removeWishProduct(productStore))
+
+  }
+
   return (
     <section className="product-content">
+
       <div className="product-content__intro">
         <h5 className="product__id">
           Product ID:
@@ -129,6 +179,7 @@ const Content = ({ product }: ProductContent) => {
             </div>
 
             <div className="flex flex-col lg:flex-row space-y-3 lg:space-y-0 ">
+
               <button
                 type="submit"
                 onClick={() => addToCart()}
@@ -138,13 +189,25 @@ const Content = ({ product }: ProductContent) => {
               </button>
 
               {/*  new wishlist button added by shatak */}
-              <button
-                type="submit"
-                onClick={() => addToCart()}
-                className="btn btn--rounded btn--border hover:bg-orange-300"
-              >
-                Add to wishlist
-              </button>
+
+              {
+                isWishExist ?
+                  <button
+                    type="submit"
+                    onClick={() => handleRemoveFromWishList()}
+                    className="btn btn--rounded btn--border hover:bg-orange-300"
+                  >
+                    Remove From wishlist
+                  </button> :
+                  <button
+                    type="submit"
+                    onClick={() => handleWishList()}
+                    className="btn btn--rounded btn--border hover:bg-orange-300"
+                  >
+                    Add to wishlist
+                  </button>
+
+              }
 
             </div>
             <button
