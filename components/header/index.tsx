@@ -109,7 +109,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
               )}
             </button>
           </Link>
-          <Link href="" >
+          <Link href="/wish" >
             <div className="relative">
               <FaHeart className="text-orange-400 text-lg ml-4">
               </FaHeart>
