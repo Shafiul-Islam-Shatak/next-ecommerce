@@ -5,7 +5,7 @@ import type { RootState } from "store";
 import { addProduct } from "store/reducers/cart";
 import { toggleFavProduct } from "store/reducers/user";
 import type { ProductStoreType, ProductType } from "types";
-
+import { BsFillHeartFill, BsFillHeartbreakFill } from "react-icons/bs";
 import productsColors from "../../../utils/data/products-colors";
 import productsSizes from "../../../utils/data/products-sizes";
 import CheckboxColor from "../../products-filter/form-builder/checkbox-color";
@@ -14,10 +14,6 @@ import { addWishProduct, removeWishProduct } from "store/reducers/wishList";
 type ProductContent = {
   product: ProductType;
 };
-
-
-
-
 
 
 const Content = ({ product }: ProductContent) => {
@@ -34,7 +30,6 @@ const Content = ({ product }: ProductContent) => {
   const wishList = useSelector((state: RootState) => state.wishList.wishItems);
 
   const isWishExist = wishList.find((item: any) => item.id === product.id)
-  console.log(isWishExist)
 
 
   const isFavourite = some(
@@ -197,14 +192,22 @@ const Content = ({ product }: ProductContent) => {
                     onClick={() => handleRemoveFromWishList()}
                     className="btn btn--rounded btn--border hover:bg-orange-300"
                   >
-                    Remove From wishlist
+                    <div className="flex items-center space-x-1">
+                      <BsFillHeartbreakFill className="text-red-500 text-lg"></BsFillHeartbreakFill >
+                      <h1> Remove From wishlist </h1>
+
+                    </div>
                   </button> :
                   <button
                     type="submit"
                     onClick={() => handleWishList()}
-                    className="btn btn--rounded btn--border hover:bg-orange-300"
+                    className="btn btn--rounded btn--border hover:bg-orange-300 "
                   >
-                    Add to wishlist
+                    <div className="flex items-center space-x-1">
+                      <BsFillHeartFill className="text-red-500 text-lg"></BsFillHeartFill>
+                      <h1> Add to wishlist </h1>
+
+                    </div>
                   </button>
 
               }

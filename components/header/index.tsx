@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "store";
 import useOnClickOutside from "use-onclickoutside";
+import { FaHeart } from "react-icons/fa";
 
 import Logo from "../../assets/icons/logo";
 
@@ -14,6 +15,9 @@ type HeaderType = {
 const Header = ({ isErrorPage }: HeaderType) => {
   const router = useRouter();
   const { cartItems } = useSelector((state: RootState) => state.cart);
+  const wishList = useSelector((state: RootState) => state.wishList.wishItems);
+  console.log(wishList.length)
+
   const arrayPaths = ["/"];
 
   const [onTop, setOnTop] = useState(
@@ -104,6 +108,16 @@ const Header = ({ isErrorPage }: HeaderType) => {
                 <span className="btn-cart__count">{cartItems.length}</span>
               )}
             </button>
+          </Link>
+          <Link href="" >
+            <div className="relative">
+              <FaHeart className="text-orange-400 text-lg ml-4">
+              </FaHeart>
+              {
+                wishList.length > 0 &&
+                <span className="text-black text-sm   absolute bottom-2 -right-2">{wishList?.length}</span>
+              }
+            </div>
           </Link>
           <Link href="/login" legacyBehavior>
             <button className="site-header__btn-avatar">
